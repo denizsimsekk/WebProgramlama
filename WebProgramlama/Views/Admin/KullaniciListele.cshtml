@@ -1,0 +1,48 @@
+﻿@model List<Kullanici>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Admin";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+
+
+}
+
+<br />
+<br></br>
+<table class="table table-dark">
+    <tr>
+        <td>
+            Kullanıcı Adı
+        </td>
+        <td>
+            Fotoğraf Sayısı
+        </td>
+    </tr>
+    @foreach(var item in Model)  
+   { <tr>
+        <td>
+            @item.KullaniciAd
+        </td>
+            <td>
+                @if (item.Fotograflar==null)
+                {
+                    <p>0</p>
+                }
+                else
+                {
+                    item.Fotograflar.Count();
+                }
+                
+            </td>
+            <td>
+                @Html.ActionLink("Düzenle", "KullaniciDuzenle","Admin",new {kullaniciID=item.Id},null) |
+                @* @Html.ActionLink("Detaylar", "Details") |*@
+                @Html.ActionLink("Sil", "KullaniciSil","Admin",new {kullaniciID=item.Id},null)
+            </td>
+    </tr>
+   }
+</table>
+@*<a class="btn btn-dark" asp-controller="Admin" asp-action="KullaniciEkleSayfasi">Kullanıcı Ekle</a>*@

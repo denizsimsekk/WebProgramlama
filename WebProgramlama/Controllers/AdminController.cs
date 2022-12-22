@@ -2,29 +2,39 @@
 using static System.Net.Mime.MediaTypeNames;
 using WebProgramlama.Models;
 using WebProgramlama.Data;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using System.Security.Cryptography;
 
 namespace WebProgramlama.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly ILogger<AdminController> _logger;
         //private readonly DbContext _context;
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly UserManager<Kullanici> _userManager;
+        private FotografKullaniciViewModel viewModel = new FotografKullaniciViewModel();
+        string userId;
 
-
-        public AdminController(ILogger<AdminController> logger, ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
+        
+        public AdminController(ILogger<AdminController> logger, ApplicationDbContext context, UserManager<Kullanici> userManager)
         {
             _logger = logger;
             _context = context;
-            _webHostEnvironment = webHostEnvironment;
+            _userManager = userManager;
+           
 
         }
 
-
+     
         public IActionResult Index()
         {
-
+            
             return View();
         }
 
@@ -42,16 +52,28 @@ namespace WebProgramlama.Controllers
             return View();
         }
 
+        
+        //[HttpPost]
+        //public IActionResult KullaniciEkle(Kullanici kullanici)
+        //{
+        //    string p = kullanici.PasswordHash;
+        //    byte[] salt = RandomNumberGenerator.GetBytes(128 / 8); // divide by 8 to convert bits to bytes
+        //    Console.WriteLine($"Salt: {Convert.ToBase64String(salt)}");
 
+        //    // derive a 256-bit subkey (use HMACSHA256 with 100,000 iterations)
+        //    string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+        //        password: p!,
+        //        salt: salt,
+        //        prf: KeyDerivationPrf.HMACSHA256,
+        //        iterationCount: 100000,
+        //        numBytesRequested: 256 / 8));
+        //    kullanici.PasswordHash = hashed;
 
-        [HttpPost]
-        public IActionResult KullaniciEkle(Kullanici kullanici)
-        {
-            _context.Kullanicilar.Add(kullanici);
-            _context.SaveChanges();
+        //    _context.Kullanicilar.Add(kullanici);
+        //    _context.SaveChanges();
 
-            return RedirectToAction("KullaniciListele", "Admin");
-        }
+        //    return RedirectToAction("KullaniciListele", "Admin");
+        //}
 
         public IActionResult KategoriEkleSayfasi()
         {
@@ -76,7 +98,7 @@ namespace WebProgramlama.Controllers
             return View(kategoriler);
         }
 
-        public IActionResult KullaniciDuzenle(int kullaniciID)
+        public IActionResult KullaniciDuzenle(string kullaniciID)
         {
             var kullanici = _context.Kullanicilar.Find(kullaniciID);
             // _context.Kullanicilar.Remove(kullanici);
@@ -84,7 +106,7 @@ namespace WebProgramlama.Controllers
             return View(kullanici);
         }
         [HttpPost]
-        public IActionResult KullaniciUpdate(Kullanici yeniKullanici, int kullaniciID)
+        public IActionResult KullaniciUpdate(Kullanici yeniKullanici, string kullaniciID)
         {
             var kullanici = _context.Kullanicilar.Find(kullaniciID);
             kullanici.KullaniciAd = yeniKullanici.KullaniciAd;
@@ -115,8 +137,9 @@ namespace WebProgramlama.Controllers
 
         public IActionResult FotografListele()
         {
-            var fotograflar = _context.Fotograflar.ToList();
-            return View(fotograflar);
+             viewModel.Fotograflar = _context.Fotograflar.ToList();
+            viewModel.Kullanicilar = _context.Kullanicilar.ToList();
+            return View(viewModel);
         }
 
         public IActionResult FotografEkleSayfasi()
@@ -208,6 +231,8 @@ namespace WebProgramlama.Controllers
         [HttpPost]
         public async Task<IActionResult> FotografEkle(Fotograf entity, IFormFile file)
         {
+            var user = User.Identity.Name;
+            userId = _context.Kullanicilar.Where(x => x.Email == user).Select(y => y.Id).ToString();
 
             if (file != null)
             {
@@ -230,7 +255,7 @@ namespace WebProgramlama.Controllers
                     await file.CopyToAsync(stream);
 
                 }
-                //entity.KullaniciID = 1;
+                entity.KullaniciID = "ab599adb-5a0f-4eec-b132-71b08c0cb69f";
                 // fotograf.Kullanici = (Kullanici)(from k in _context.Kullanicilar where k.KullaniciID == 1 select k);
                 entity.KategoriID = 1;
                 //entity.DateAdded = DateTime.Now;

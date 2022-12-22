@@ -1,0 +1,46 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<table class="table table-dark">
+    <tr>
+        <td>
+            Kullanıcı Adı
+        </td>
+        <td>
+            Fotoğraf Açıklaması
+        </td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+
+                @*@item.KullaniciID*@
+            </td>
+            <td>
+                @item.FotografAciklamasi
+            </td>
+
+        </tr>
+        <tr>
+            @{
+                var base64 = Convert.ToBase64String(item.yuklenenFotograf);
+                var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+            }
+            <td>
+                <img src="@imgsrc" width="60" />
+            </td>
+            <td>
+                @*  @Html.ActionLink("Düzenle", "Edit") |*@
+                @* @Html.ActionLink("Detaylar", "Details") |*@
+                @Html.ActionLink("Sil", "FotografSil","Admin",new {fotogradId=item.FotografId},null)
+
+            </td>
+        </tr>
+    }
+</table>
+<br />
+<br />
+<a class="btn btn-dark" asp-controller="Admin" asp-action="FotografEkleSayfasi">Fotoğraf Ekle Ekle</a>

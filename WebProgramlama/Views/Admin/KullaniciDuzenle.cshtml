@@ -1,0 +1,115 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Kullanici
+
+@{
+    ViewData["Title"] = "Admin";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+
+<div class="container mt-5">
+    <form method="post" asp-action="KullaniciUpdate" onload="showalert()" id="kullaniciDuzenleFormu">
+
+        <div class="form-row">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="@Model.KullaniciAd" id="ad" asp-for="@Model.KullaniciAd">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="@Model.KullaniciSoyadi" id="soyad" asp-for="@Model.KullaniciSoyadi">
+            </div>
+        </div>
+
+        <div class="form-row" style="margin-top=10px">
+            <div class="form-group col-md-6">
+                @*<label for="inputEmail4">Email</label>*@
+                <input type="text" class="form-control" placeholder="@Model.Email" id="kullaniciadi" asp-for="@Model.Email" required>
+            </div>
+            <div class="form-group col-md-6">
+                @*<label for="inputPassword4">Password</label>*@
+                <input type="text" class="form-control" placeholder="Password" id="sifre" asp-for="@Model.PasswordHash">
+            </div>
+        </div>
+        @*<div class="form-group">
+        <label for="inputAddress">Address</label>
+        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+        </div>
+        <div class="form-group">
+        <label for="inputAddress2">Address 2</label>
+        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+        </div>
+        <div class="form-row">
+        <div class="form-group col-md-6">
+        <label for="inputCity">City</label>
+        <input type="text" class="form-control" id="inputCity">
+        </div>
+        <div class="form-group col-md-4">
+        <label for="inputState">State</label>
+        <select id="inputState" class="form-control">
+        <option selected>Choose...</option>
+        <option>...</option>
+        </select>
+        </div>
+        <div class="form-group col-md-2">
+        <label for="inputZip">Zip</label>
+        <input type="text" class="form-control" id="inputZip">
+        </div>
+        </div>
+        <div class="form-group">
+        <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck">
+        <label class="form-check-label" for="gridCheck">
+        Check me out
+        </label>
+        </div>
+        </div>*@
+
+@*        <button type="submit" class="btn btn-primary" onclick='location.href='@Html.ActionLink("Güncelle", "KullaniciUpdate","Admin",new {kullaniciID=Model.KullaniciID},null)""'></button>
+*@
+        @using(Html.BeginForm("Details","Admin"))
+        {
+            <input type="hidden" name="KullaniciID" value="@Model.Id" />
+            <input type="submit" class="btn btn-primary" value="Güncelle" />
+        }
+    
+    </form>
+</div>
+@*<input type="text" id="serdar" />
+<input type="button" id="btn_Gonder" />*@
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+<script src="http://bainternet-js-cdn.googlecode.com/svn/trunk/js/jQuery%20BlockUI%20Plugin/2.39/jquery.blockUI.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js" ></script>
+@section scripts
+{
+    <script>
+
+        //function showalert() {
+        //    $('#kullaniciDuzenleFormu').on("load", function () {
+        //        $('#ad').val("İşte bu kadar");
+        //    });
+        //}
+
+            
+        $("#kullaniciDuzenleFormu").ready( function () {
+            $("#ad").val("@Model.KullaniciAd");
+            $("#soyad").val("@Model.KullaniciSoyadi");
+            $("#kullaniciadi").val("@Model.Email");
+            $("#sifre").val("@Model.PasswordHash");
+                    });
+        /*$('#btn_Gonder').click(function () {
+            $('#serdar').val("İşte bu kadar");
+        });*/
+
+            //$(function () {
+            //    $('#kullaniciDuzenleFormu').on("load", function () {
+            //        $('#ad').val("İşte bu kadar");
+            //    });
+            //});
+
+
+    </script>
+
+}
+
+
