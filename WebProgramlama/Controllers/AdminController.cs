@@ -19,6 +19,8 @@ namespace WebProgramlama.Controllers
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly UserManager<Kullanici> _userManager;
         private FotografKullaniciViewModel viewModel = new FotografKullaniciViewModel();
+
+
         string userId;
 
         
@@ -137,15 +139,19 @@ namespace WebProgramlama.Controllers
 
         public IActionResult FotografListele()
         {
-             viewModel.Fotograflar = _context.Fotograflar.ToList();
+
+          
+        viewModel.Fotograflar = _context.Fotograflar.ToList();
             viewModel.Kullanicilar = _context.Kullanicilar.ToList();
             return View(viewModel);
         }
 
         public IActionResult FotografEkleSayfasi()
         {
+            viewModel.Fotograflar = _context.Fotograflar.ToList();
+            viewModel.Kategoriler = _context.Kategoriler.ToList();
 
-            return View();
+            return View(viewModel);
         }
 
 
@@ -233,7 +239,7 @@ namespace WebProgramlama.Controllers
         {
             var user = User.Identity.Name;
             userId = _context.Kullanicilar.Where(x => x.Email == user).Select(y => y.Id).ToString();
-
+            Console.WriteLine(entity.KategoriID.ToString()+" kategorisi");
             if (file != null)
             {
 
@@ -257,7 +263,7 @@ namespace WebProgramlama.Controllers
                 }
                 entity.KullaniciID = "ab599adb-5a0f-4eec-b132-71b08c0cb69f";
                 // fotograf.Kullanici = (Kullanici)(from k in _context.Kullanicilar where k.KullaniciID == 1 select k);
-                entity.KategoriID = 1;
+                
                 //entity.DateAdded = DateTime.Now;
                 _context.Fotograflar.Add(entity);
                 _context.SaveChanges();

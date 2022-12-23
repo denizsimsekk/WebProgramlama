@@ -7,6 +7,7 @@
 
 }
 
+@model FotografKullaniciViewModel
 
 <div class="container mt-5">
     <form method="post" asp-action="FotografEkle" enctype="multipart/form-data">
@@ -25,7 +26,21 @@
             <input class="form-control" type="file" id="formFile" name="yuklenenFotograf">
             @*<span asp-validation-for="Image" class="text-danger"></span>
         </div>*@
+        <div class="form-row">
+            <select class="form-select" name="KategoriID" aria-label="Default select example">
+                @foreach (var item in Model.Kategoriler)
+                {
 
+                    <option value="@item.KategoriId"  >@item.KategoriId</option>
+
+                }
+
+            </select>
+            @*<select asp-for="@Model.secilenFotograf.KategoriID"
+                    asp-items="@(new SelectList(Model.Kategoriler, nameof(Kategori.KategoriId), nameof(Kategori.KategoriIsmi)))">
+                <option>Please select one</option>
+            </select>*@
+        </div>
         <div class="form-group">
 
             <input type="file" name="file" id="file" class="form-control" />
@@ -75,5 +90,6 @@
         </div>
         </div>*@
         <button type="submit" class="btn btn-primary">Ekle</button>
+        
     </form>
 </div>

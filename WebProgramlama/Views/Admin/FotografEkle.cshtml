@@ -3,6 +3,7 @@
 *@
 @{
 }
+@model List<Kategori>
 <div class="container mt-5">
     <form method="post" asp-action="FotografEkle" enctype="multipart/form-data">
 
@@ -14,7 +15,7 @@
             <input type="text" class="form-control" placeholder="Soyad" name="KullaniciSoyadi">
             </div>*@
         </div>
-
+       
         @*<div class="mb-3">
         <label for="formFile" class="form-label">Fotoğraf Yükle</label>
         <input class="form-control" type="file" id="formFile" name="yuklenenFotograf">

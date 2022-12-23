@@ -26,10 +26,10 @@
                 @*<label for="inputEmail4">Email</label>*@
                 <input type="text" class="form-control" placeholder="@Model.Email" id="kullaniciadi" asp-for="@Model.Email" required>
             </div>
-            <div class="form-group col-md-6">
-                @*<label for="inputPassword4">Password</label>*@
+           @* <div class="form-group col-md-6">
+                @*<label for="inputPassword4">Password</label>
                 <input type="text" class="form-control" placeholder="Password" id="sifre" asp-for="@Model.PasswordHash">
-            </div>
+            </div>*@
         </div>
         @*<div class="form-group">
         <label for="inputAddress">Address</label>
@@ -67,7 +67,7 @@
 
 @*        <button type="submit" class="btn btn-primary" onclick='location.href='@Html.ActionLink("Güncelle", "KullaniciUpdate","Admin",new {kullaniciID=Model.KullaniciID},null)""'></button>
 *@
-        @using(Html.BeginForm("Details","Admin"))
+        @using(Html.BeginForm())
         {
             <input type="hidden" name="KullaniciID" value="@Model.Id" />
             <input type="submit" class="btn btn-primary" value="Güncelle" />
