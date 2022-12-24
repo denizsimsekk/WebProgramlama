@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -15,6 +16,7 @@ namespace WebProgramlama.Controllers
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly UserManager<Kullanici> _userManager;
         string userId;
+        private FotografKullaniciViewModel viewModel = new FotografKullaniciViewModel();
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, UserManager<Kullanici> userManager)
         {
@@ -23,6 +25,26 @@ namespace WebProgramlama.Controllers
             _userManager = userManager;
 
 
+        }
+
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddDays(1) }
+            );
+
+            return LocalRedirect(returnUrl);
+        }
+        public IActionResult ChangeLanguage(string culture)
+        {
+            Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions() { Expires = DateTimeOffset.UtcNow.AddYears(1) });
+
+            return Redirect(Request.Headers["Referer"].ToString());
         }
 
         public IActionResult Index()
@@ -39,8 +61,10 @@ namespace WebProgramlama.Controllers
         [Authorize]
         public IActionResult FotografEkleSayfasi()
         {
+            //viewModel.Fotograflar = _context.Fotograflar.ToList();
+            viewModel.Kategoriler = _context.Kategoriler.ToList();
 
-            return View();
+            return View(viewModel);
         }
 
         
@@ -74,7 +98,7 @@ namespace WebProgramlama.Controllers
                 }
                 entity.KullaniciID = userId;
                 // fotograf.Kullanici = (Kullanici)(from k in _context.Kullanicilar where k.KullaniciID == 1 select k);
-                entity.KategoriID = 1;
+                
                 //entity.DateAdded = DateTime.Now;
                 _context.Fotograflar.Add(entity);
                 _context.SaveChanges();
@@ -89,6 +113,58 @@ namespace WebProgramlama.Controllers
             var fotograflar = _context.Fotograflar.ToList();
             return View(fotograflar);
         }
+
+        public IActionResult Fotograflar(int id)
+        {
+            var fotograflar= _context.Fotograflar.ToList(); 
+            if (id == 0)
+            {
+                 fotograflar = _context.Fotograflar.ToList();
+
+            }
+            else if (id == 1)
+            {
+                //linq
+                fotograflar = _context.Fotograflar.ToList().Where(f=>f.KategoriID==1).ToList();
+
+            }
+            else if (id == 2)
+            {
+                //linq
+                fotograflar = _context.Fotograflar.ToList().Where(f => f.KategoriID == 2).ToList();
+
+            }
+            else if (id == 3)
+            {
+                //linq
+                fotograflar = _context.Fotograflar.ToList().Where(f => f.KategoriID == 3).ToList();
+
+            }
+            else if (id == 4)
+            {
+                //linq
+                fotograflar = _context.Fotograflar.ToList().Where(f => f.KategoriID == 4).ToList();
+
+            }
+            else if (id == 5)
+            {
+                //linq
+                fotograflar = _context.Fotograflar.ToList().Where(f => f.KategoriID ==5).ToList();
+
+            }
+            else if (id == 7)
+            {
+                //linq
+                fotograflar = _context.Fotograflar.ToList().Where(f => f.KategoriID == 4).ToList();
+
+            }
+            viewModel.Fotograflar = _context.Fotograflar.ToList();
+            viewModel.Kategoriler = _context.Kategoriler.ToList();
+
+            return View(fotograflar);
+        }
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

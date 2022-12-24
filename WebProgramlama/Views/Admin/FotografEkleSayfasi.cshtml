@@ -27,11 +27,11 @@
             @*<span asp-validation-for="Image" class="text-danger"></span>
         </div>*@
         <div class="form-row">
-            <select class="form-select" name="KategoriID" aria-label="Default select example">
+            <select class="form-select form-select-sm" name="KategoriID" aria-label="Default select example">
                 @foreach (var item in Model.Kategoriler)
                 {
 
-                    <option value="@item.KategoriId"  >@item.KategoriId</option>
+                    <option value="@item.KategoriId"  >@item.KategoriIsmi</option>
 
                 }
 

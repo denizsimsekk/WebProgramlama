@@ -239,7 +239,6 @@ namespace WebProgramlama.Controllers
         {
             var user = User.Identity.Name;
             userId = _context.Kullanicilar.Where(x => x.Email == user).Select(y => y.Id).ToString();
-            Console.WriteLine(entity.KategoriID.ToString()+" kategorisi");
             if (file != null)
             {
 
@@ -261,7 +260,7 @@ namespace WebProgramlama.Controllers
                     await file.CopyToAsync(stream);
 
                 }
-                entity.KullaniciID = "ab599adb-5a0f-4eec-b132-71b08c0cb69f";
+                entity.KullaniciID = userId;
                 // fotograf.Kullanici = (Kullanici)(from k in _context.Kullanicilar where k.KullaniciID == 1 select k);
                 
                 //entity.DateAdded = DateTime.Now;

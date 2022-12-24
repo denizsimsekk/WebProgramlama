@@ -1,8 +1,19 @@
-﻿@{
+﻿@using Microsoft.Extensions.Options
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Builder
+@inject LanguageService language
+
+@{
     ViewData["Title"] = "Home Page";
 }
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+@inject LanguageService language
 
+<div class="text-center">
+
+    <h1 class="display-4">@language.Getkey("welcome")</h1>
+
+</div>
 
 <div class="container-fluid">
     <div class="row">
@@ -63,31 +74,106 @@
 
     <div class="card-deck" style="margin-top:30px;margin-bottom:50px">
         <div class="card">
-            <img class="card-img-top" src="~/images/1.jpg" width="350px" height="300px" alt="Card image cap">
+            <img class="card-img-top" src="~/images/22.jpg" width="350px" height="300px" alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title">Manzara</h5>
+                <h5 class="card-title">@language.Getkey("scenery")</h5>
                 @*<p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>*@
+                <a asp-controller="Home" asp-action="Fotograflar" asp-route-id="3" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>
+
             </div>
         </div>
         <div class="card">
             <img class="card-img-top" src="~/images/11.jpg" width="350px" height="300px" alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title">Sonbahar</h5>
+                <h5 class="card-title">@language.Getkey("autmn")</h5>
                @* <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>*@
+                <a asp-controller="Home" asp-action="Fotograflar" asp-route-id="1" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>
+
             </div>
         </div>
         <div class="card">
             <img class="card-img-top" src="~/images/12.jpg" width="350px" height="300px"  alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title">Kitap</h5>
+                <h5 class="card-title">@language.Getkey("books")</h5>
                @* <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>*@
+                <a asp-controller="Home" asp-action="Fotograflar" asp-route-id="2" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>
+
+            </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="~/images/23.jpg" width="350px" height="300px" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@language.Getkey("movieShow")</h5>
+                @* <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>*@
+                <a asp-controller="Home" asp-action="Fotograflar" asp-route-id="6" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>
+
+            </div>
+        </div>
+    </div>
+    <div class="card-deck" style="margin-top:30px;margin-bottom:50px">
+        
+        <div class="card">
+            <img class="card-img-top" src="~/images/15.jpg" width="350px" height="300px" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@language.Getkey("city")</h5>
+                @* <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>*@
+                <a asp-controller="Home" asp-action="Fotograflar" asp-route-id="4" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>
+
+            </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="~/images/17.jpg" width="350px" height="300px" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@language.Getkey("canvas")</h5>
+                @* <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>*@
+                <a asp-controller="Home" asp-action="Fotograflar" asp-route-id="5" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>
+
+            </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="~/images/21.jpg" width="350px" height="300px" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@language.Getkey("other")</h5>
+                <a asp-controller="Home" asp-action="Fotograflar" asp-route-id="7" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>
+
+                @* <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>*@
             </div>
         </div>
     </div>
   </div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+<script src="http://bainternet-js-cdn.googlecode.com/svn/trunk/js/jQuery%20BlockUI%20Plugin/2.39/jquery.blockUI.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+@section scripts
+    {
+    <script>
+        //js
+       
+       function SetCulture(selectedValue)
+       {
+            var culture ="/?culture="+selectedValue+"&ui-culture="+selectedValue;
+           alert(culture);
+       
+           document.getElementById("cultureForm").action=culture;
+           document.getElementById("cultureForm").submit();
+
+       
+       }
+
+
+    </script>
+
+}
+
 
 
 
