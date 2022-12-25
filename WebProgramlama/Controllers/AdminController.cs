@@ -43,7 +43,9 @@ namespace WebProgramlama.Controllers
         public IActionResult KullaniciListele()
         {
             var kullanicilar = _context.Kullanicilar.ToList();
-            return View(kullanicilar);
+            viewModel.Kullanicilar = _context.Kullanicilar.ToList();
+            viewModel.Fotograflar = _context.Fotograflar.ToList();
+            return View(viewModel);
         }
 
 
@@ -127,7 +129,14 @@ namespace WebProgramlama.Controllers
 
             return RedirectToAction("KullaniciListele", "Admin");
         }
+        public IActionResult KategoriSil(int kategoriID)
+        {
+            var kategori = _context.Kategoriler.Find(kategoriID);
+            _context.Kategoriler.Remove(kategori);
+            _context.SaveChanges();
 
+            return RedirectToAction("KategoriListele", "Admin");
+        }
         public IActionResult FotografSil(int fotogradId)
         {
 

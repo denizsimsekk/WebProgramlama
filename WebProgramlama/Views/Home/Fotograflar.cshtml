@@ -4,16 +4,138 @@
 @{
 }
 @model List<Fotograf>
+@inject LanguageService language
+
+@*
+<div class="container-fluid padding">
+    <div class="card-deck">
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                @{
+                    var base64 = Convert.ToBase64String(item.yuklenenFotograf);
+                    var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+                }
+
+                <img class="card-img-top" src="@imgsrc" width="350px" height="300px" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@item.FotografAciklamasi</h5>
+
+                    @* <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+*@
+
 
 <div class="container-fluid">
 
 
+    @*<table class="table">
+      
+        <tbody>
+            <tr>
+                
+                @foreach (var item in Model)
+                {
+                   
+                        <div class="card">
+                            @{
+                                var base64 = Convert.ToBase64String(item.yuklenenFotograf);
+                                var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+                            }
+
+                            <img class="card-img-top" src="@imgsrc" width="350px" height="300px" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.FotografAciklamasi</h5>
+
+                                @* <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+                   
+                }
+                <br />
+            </tr>
+            
+        </tbody>
+    </table>*@
+
+
+
+    <div style="display: inline-block">
+        @for (int i = 0; i < Model.Count(); i += 3)
+        {
+            <div class="row">
+                @{
+                    int j = 0;
+                    for (; j <= 2 && i + j < Model.Count(); j++)
+                    {
+                        <div class="col-md-4">
+                            <div class="card">
+                                @{
+
+                                    var base64 = Convert.ToBase64String(Model[i+j].yuklenenFotograf);
+                                    var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+                                }
+
+                                <img class="card-img-top" src="@imgsrc" width="350px" height="300px" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">@Model[i+j].FotografAciklamasi</h5>
+
+                                    @* <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>*@
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        }
+    </div>
+
+
+
+
+@*
+        @for (var i = 0; i < Model.Count(); i++)
+        {
+            <div class="row card-layout">
+                <div class="col-sm control-section card-control-section">
+
+                    <div class="card">
+                        @{
+                    
+                            var base64 = Convert.ToBase64String(Model[i].yuklenenFotograf);
+                            var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+                        }
+
+                        <img class="card-img-top" src="@imgsrc" width="350px" height="300px" alt="Card image cap">
+                        <div class="card-body">
+                        <h5 class="card-title">@Model[i].FotografAciklamasi</h5>
+
+                            @* <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+            if (i % 3 == 2)
+            {
+                <br />
+            }
+        }*@
+
     
-        <div class="row card-layout">
+       @* <div class="row card-layout">
            
             <br />
             @foreach (var item in Model)
             {
+
                 <div class="col-sm control-section card-control-section">
                         <div class="card">
                             @{
@@ -24,15 +146,16 @@
                             <img class="card-img-top" src="@imgsrc" width="350px" height="300px" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">@item.FotografAciklamasi</h5>
+
                                 @* <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>*@
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                             </div>
                         </div>
                 </div>
             }
             <br />
               
-        </div>
+        </div>*@
     
 
 

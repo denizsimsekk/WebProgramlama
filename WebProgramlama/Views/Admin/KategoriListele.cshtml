@@ -27,10 +27,16 @@
             <td>
                 @item.KategoriIsmi
             </td>
+            <td>
+                    @Html.ActionLink("Sil", "KategoriSil","Admin",new {kategoriId=item.KategoriId},null)
 
+            </td>
            
         </tr>
+        
+
     }
+    
 </table>
 <br />
 <br />

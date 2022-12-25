@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MessagePack;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
@@ -38,6 +39,7 @@ namespace WebProgramlama.Controllers
 
             return LocalRedirect(returnUrl);
         }
+        
         public IActionResult ChangeLanguage(string culture)
         {
             Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
@@ -102,7 +104,7 @@ namespace WebProgramlama.Controllers
                 //entity.DateAdded = DateTime.Now;
                 _context.Fotograflar.Add(entity);
                 _context.SaveChanges();
-                return RedirectToAction("FotografListele");
+                return RedirectToAction("Kategori",entity.KategoriID);
             }
 
             return View();
@@ -112,6 +114,50 @@ namespace WebProgramlama.Controllers
         {
             var fotograflar = _context.Fotograflar.ToList();
             return View(fotograflar);
+        }
+
+
+        public IActionResult Fotograf(int id)
+        {
+
+            viewModel.secilenFotograf = _context.Fotograflar.ToList().Where(f=>f.FotografId==id).FirstOrDefault();
+            viewModel.Fotograflar = _context.Fotograflar.ToList();
+            viewModel.Kategoriler = _context.Kategoriler.ToList();
+            viewModel.Kullanicilar = _context.Kullanicilar.ToList();
+
+
+            return View(viewModel);
+        }
+        public IActionResult Kullanici(string id)
+        {
+
+            viewModel.secilenKullanici = _context.Kullanicilar.ToList().Where(k => k.Id == id).FirstOrDefault();
+            viewModel.Fotograflar = _context.Fotograflar.ToList().Where(f=>f.KullaniciID==id).ToList();
+            viewModel.Kategoriler = _context.Kategoriler.ToList();
+            viewModel.Kullanicilar = _context.Kullanicilar.ToList();
+
+
+            return View(viewModel);
+        }
+        public IActionResult KategoriListele()
+        {
+
+            viewModel.Fotograflar = _context.Fotograflar.ToList();
+            viewModel.Kategoriler = _context.Kategoriler.ToList();
+
+
+            return View(viewModel);
+        }
+        public IActionResult Kategori(int id)
+        {
+
+            //viewModel.secilenKullanici = _context.Kullanicilar.ToList().Where(k => k.Id == id).FirstOrDefault();
+            viewModel.Fotograflar = _context.Fotograflar.ToList().Where(f => f.KategoriID == id).ToList();
+            viewModel.Kategoriler = _context.Kategoriler.ToList().Where(f => f.KategoriId == id).ToList();
+            viewModel.Kullanicilar = _context.Kullanicilar.ToList();
+
+
+            return View(viewModel);
         }
 
         public IActionResult Fotograflar(int id)

@@ -9,11 +9,11 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
 @inject LanguageService language
 
-<div class="text-center">
+@*<div class="text-center">
 
     <h1 class="display-4">@language.Getkey("welcome")</h1>
 
-</div>
+</div>*@
 
 <div class="container-fluid">
     <div class="row">
@@ -150,29 +150,7 @@
   </div>
 
 
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
-<script src="http://bainternet-js-cdn.googlecode.com/svn/trunk/js/jQuery%20BlockUI%20Plugin/2.39/jquery.blockUI.js"></script>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-@section scripts
-    {
-    <script>
-        //js
-       
-       function SetCulture(selectedValue)
-       {
-            var culture ="/?culture="+selectedValue+"&ui-culture="+selectedValue;
-           alert(culture);
-       
-           document.getElementById("cultureForm").action=culture;
-           document.getElementById("cultureForm").submit();
 
-       
-       }
-
-
-    </script>
-
-}
 
 
 

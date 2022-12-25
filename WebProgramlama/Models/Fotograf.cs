@@ -27,7 +27,7 @@ namespace WebProgramlama.Models
         [Required]
         public byte[] yuklenenFotograf { get; set; }
 
-
+       
 
 
     }

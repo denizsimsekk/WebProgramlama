@@ -1,0 +1,89 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model FotografKullaniciViewModel
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="container-fluid">
+
+
+    <div class="row">
+
+       <div class="col-md">
+            @{
+                var base641 = Convert.ToBase64String(Model.secilenFotograf.yuklenenFotograf);
+                var imgsrc1 = string.Format("data:image/gif;base64,{0}", base641);
+            }
+
+            <img src="@imgsrc1"  class="img-thumbnail">
+
+       </div>
+        <div class="col-md">
+            <div class="row">
+                <h5 class="card-title">@Model.secilenFotograf.FotografAciklamasi</h5>
+
+            </div>
+            <div class="row">
+                @{
+                    var kategori = Model.Kategoriler.ToList().Where(k => k.KategoriId == Model.secilenFotograf.KategoriID).FirstOrDefault();
+                }
+                <a asp-controller="Home" asp-action="Kategori" asp-route-id="@kategori.KategoriId" id="goSwhButton" bc-button="true">@kategori.KategoriIsmi</a>
+                              @*  <h5 class="card-title">@kategori.KategoriIsmi</h5>*@
+
+            </div>
+            <div class="row">
+                @{
+                    var kullanici = Model.Kullanicilar.ToList().Where(k => k.Id == Model.secilenFotograf.KullaniciID).FirstOrDefault();
+                }
+                <a asp-controller="Home" asp-action="Kullanici" asp-route-id="@kullanici.Id" id="goSwhButton" bc-button="true">@kullanici.Email</a>
+
+            </div>
+            <div class="row">
+                @*<button class="btn" id="green"><i class="fa fa-thumbs-up fa-lg" onclick="like()" aria-hidden="true"></i></button>
+                <button class="btn" id="red"><i class="fa fa-thumbs-down fa-lg" onclick="like()"  aria-hidden="true"></i></button>
+*@
+                
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+    @*<div class="row card-layout">
+
+        <br />
+
+
+
+
+        
+            <div class="col-sm control-section card-control-section">
+                <div class="card">
+                    @{
+                        var base64 = Convert.ToBase64String(Model.yuklenenFotograf);
+                        var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+                    }
+
+                    <img class="card-img-top" src="@imgsrc" width="350px" height="300px" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.FotografAciklamasi</h5>
+                        @*//<a asp-controller="Home" asp-action="Fotograf" asp-route-id="@Model.FotografId" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>*@
+
+                        @* <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+        
+        <br />
+
+    </div>*@
+
+
+
+
+</div>

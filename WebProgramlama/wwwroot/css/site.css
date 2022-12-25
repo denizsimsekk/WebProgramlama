@@ -235,3 +235,13 @@ body {
 #goSwhButton {
     color: #535454;
 }
+
+.fa {
+    font-size: 100px;
+    cursor: pointer;
+    user-select: none;
+}
+
+    .fa:hover {
+        color: darkblue;
+    }

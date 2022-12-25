@@ -29,6 +29,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="FotografEkleSayfasi">@language.Getkey("uploadPhoto")</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="KategoriListele">@language.Getkey("categories")</a>
+                        </li>
                         @if (User.Identity.IsAuthenticated)
                         {
                             if(User.IsInRole("Admin"))
@@ -55,7 +58,6 @@
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li>
-                            <b>Deutsch</b> <i class="fa fa-angle-down" aria-hidden="true"></i>
                             <div class="triangle"></div>
                             <ul class="language">
 

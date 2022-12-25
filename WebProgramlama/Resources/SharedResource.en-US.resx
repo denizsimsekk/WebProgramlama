@@ -126,6 +126,9 @@
   <data name="canvas" xml:space="preserve">
     <value>Canvas</value>
   </data>
+  <data name="categories" xml:space="preserve">
+    <value>Categories</value>
+  </data>
   <data name="city" xml:space="preserve">
     <value>City</value>
   </data>
@@ -149,6 +152,9 @@
   </data>
   <data name="movieShow" xml:space="preserve">
     <value>Movies - TV Shows</value>
+  </data>
+  <data name="open" xml:space="preserve">
+    <value>Open</value>
   </data>
   <data name="other" xml:space="preserve">
     <value>Other</value>

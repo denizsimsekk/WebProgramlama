@@ -1,0 +1,54 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model FotografKullaniciViewModel
+
+@inject LanguageService language
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Kategori İsmi</th>
+            <th scope="col">Fotoğraf Sayısı</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.Kategoriler)
+        {
+            <tr>
+                <th scope="row">1</th>
+                <td>
+                    <a asp-controller="Home" asp-action="Kategori" asp-route-id="@item.KategoriId" id="goSwhButton" bc-button="true">@item.KategoriIsmi</a>
+                </td>
+                @{
+                    var fotograflar = Model.Fotograflar.ToList().Where(f => f.KategoriID == item.KategoriId).ToList();
+                }
+                
+                <td>@fotograflar.Count()</td>
+            </tr>
+        }
+        @*<tr>
+            <th scope="row">1</th>
+            <td>@</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+        </tr>*@
+    </tbody>
+</table>
+
