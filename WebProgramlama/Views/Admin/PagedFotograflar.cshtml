@@ -7,7 +7,7 @@
 @{
     ViewData["Title"] = "Admin";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-  
+
 
 }
 <link href="~/Content/PagedList.css" rel="stylesheet" />
@@ -22,7 +22,7 @@
         <td>
             Kullanıcı Adı
         </td>
-       <td>
+        <td>
             Fotoğraf Açıklaması
         </td>
     </tr>
@@ -43,13 +43,13 @@
                 @item.FotografAciklamasi
             </td>
 
-        @*</tr>
+            @*</tr>
         <tr>*@
             @{
                 var base64 = Convert.ToBase64String(item.yuklenenFotograf);
                 var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
             }
-           <td>
+            <td>
                 <img src="@imgsrc" width="60" />
             </td>
             <td>
@@ -68,5 +68,6 @@
 
 
 <a class="btn btn-dark" asp-controller="Admin" asp-action="FotografEkleSayfasi">Fotoğraf Yükle</a>
-@await Html.PartialAsync("_Pagination",10)
 
+
+@await Html.PartialAsync("_Pagination",10)

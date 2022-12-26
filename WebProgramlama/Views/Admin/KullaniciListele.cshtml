@@ -5,7 +5,7 @@
 @{
     ViewData["Title"] = "Admin";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-
+  
 
 
 }
@@ -41,3 +41,5 @@
    }
 </table>
 @*<a class="btn btn-dark" asp-controller="Admin" asp-action="KullaniciEkleSayfasi">Kullanıcı Ekle</a>*@
+
+@await Html.PartialAsync("_Pagination",10)

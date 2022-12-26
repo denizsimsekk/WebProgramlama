@@ -5,7 +5,10 @@
 }
 @model List<Fotograf>
 @inject LanguageService language
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 
+@using PagedList.Mvc
+@using PagedList
 @*
 <div class="container-fluid padding">
     <div class="card-deck">
@@ -32,7 +35,7 @@
 
 
 <div class="container-fluid">
-
+   
 
     @*<table class="table">
       
@@ -74,23 +77,22 @@
                     int j = 0;
                     for (; j <= 2 && i + j < Model.Count(); j++)
                     {
-                        <div class="col-md-4">
-                            <div class="card">
-                                @{
+                            <div class="col-md-4">
+                                <div class="card">
+                                    @{
 
                                     var base64 = Convert.ToBase64String(Model[i+j].yuklenenFotograf);
                                     var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
-                                }
+                                    }
 
-                                <img class="card-img-top" src="@imgsrc" width="350px" height="300px" alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title">@Model[i+j].FotografAciklamasi</h5>
+                                    <img class="card-img-top" src="@imgsrc" width="350px" height="300px" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@Model[i+j].FotografAciklamasi</h5>
+                                        <a asp-controller="Home" asp-action="Fotograf" asp-route-id="@Model[i+j].FotografId" id="goSwhButton" bc-button="true">@language.Getkey("open")</a>
 
-                                    @* <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>*@
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                     }
                 }
             </div>
@@ -161,4 +163,4 @@
 
 
 </div>
-
+@await Html.PartialAsync("_Pagination",10)

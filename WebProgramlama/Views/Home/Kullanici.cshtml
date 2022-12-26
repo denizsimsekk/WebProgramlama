@@ -5,15 +5,20 @@
 }
 @model FotografKullaniciViewModel
 @inject LanguageService language
-
+@{
+    var email = @Model.secilenKullanici.Email;
+    var kullaniciAdi = @Model.secilenKullanici.KullaniciAd;
+    var kullaniciSoyadi = @Model.secilenKullanici.KullaniciSoyadi;
+}
 <div class="container-fluid">
 
     <div class="row">
-        <h1>@Model.secilenKullanici.Email</h1>
+        <h1>@email</h1>
     </div>
+
     <div class="row">
         <div class="col-md">
-            <h3>@Model.secilenKullanici.KullaniciAd @Model.secilenKullanici.KullaniciSoyadi</h3>
+            <h3>@kullaniciAdi @kullaniciSoyadi</h3>
       
         </div>
        
@@ -21,34 +26,41 @@
     
   
 
-    <div class="row card-layout">
-
-        <br />
-        @foreach (var item in Model.Fotograflar)
+    <div style="display: inline-block">
+        @for (int i = 0; i < Model.Fotograflar.Count(); i += 3)
         {
-            <div class="col-sm control-section card-control-section">
-                <div class="card">
-                    @{
-                        var base64 = Convert.ToBase64String(item.yuklenenFotograf);
-                        var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+            <div class="row">
+                @{
+                    int j = 0;
+                    for (; j <= 2 && i + j < Model.Fotograflar.Count(); j++)
+                    {
+                        <div class="col-md-4">
+                            <div class="card">
+                                @{
+
+                                    var base64 = Convert.ToBase64String(Model.Fotograflar[i + j].yuklenenFotograf);
+                                    var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+                                }
+
+                                <img class="card-img-top" src="@imgsrc" width="350px" height="300px" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">@Model.Fotograflar[i+j].FotografAciklamasi</h5>
+                                    <a asp-controller="Home" asp-action="Fotograf" asp-route-id="@Model.Fotograflar[i+j].FotografId" id="goSwhButton" bc-button="true">@language.Getkey("open")</a>
+
+                                    @* <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>*@
+                                </div>
+                            </div>
+                        </div>
                     }
-
-                    <img class="card-img-top" src="@imgsrc" width="350px" height="300px" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">@item.FotografAciklamasi</h5>
-                        <a asp-controller="Home" asp-action="Fotograf" asp-route-id="@item.FotografId" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>
-
-                        @* <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>*@
-                    </div>
-                </div>
+                }
             </div>
         }
-        <br />
-
     </div>
 
 
 </div>
+@await Html.PartialAsync("_Pagination",10)
+
 
 

@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Security.Cryptography;
+using PagedList;
+using PagedList.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace WebProgramlama.Controllers
 {
@@ -40,11 +43,38 @@ namespace WebProgramlama.Controllers
             return View();
         }
 
-        public IActionResult KullaniciListele()
+
+        public List<Kullanici> PaginatedResult(List<Kullanici> t, int page, int rowsPerPage)
         {
-            var kullanicilar = _context.Kullanicilar.ToList();
-            viewModel.Kullanicilar = _context.Kullanicilar.ToList();
+            @ViewBag.TotalRecords = t.Count;
+            @ViewBag.CurrentPage = page;
+
+            var skip = (page - 1) * rowsPerPage;
+
+            var paginatedResult = t.Skip(skip).Take(rowsPerPage).ToList();
+            return paginatedResult;
+        }
+
+
+        public IActionResult KullaniciListele(int pg=1,int page=1)
+        {
+
+            var jobs = _context.Kullanicilar
+            .ToList();
+
+            viewModel.Kullanicilar = PaginatedResult(jobs, page, 10);
+            //var kullanicilar = _context.Kullanicilar.ToList();
+            // = _context.Kullanicilar.ToList();
             viewModel.Fotograflar = _context.Fotograflar.ToList();
+           // const int pageSize = 10;
+           // if (pg < 1)
+           //     pg = 1;
+           // int recsCount = viewModel.Kullanicilar.Count();
+           // var pager = new Pager(recsCount, pg, pageSize);
+           // int recSkip = (pg - 1) * pageSize;
+           //viewModel.Kullanicilar = viewModel.Kullanicilar.Skip(recSkip).Take(pager.PageSize).ToList();
+           // this.ViewBag.Pager = pager;
+            
             return View(viewModel);
         }
 
@@ -146,12 +176,42 @@ namespace WebProgramlama.Controllers
             return RedirectToAction("FotografListele", "Admin");
         }
 
-        public IActionResult FotografListele()
+
+        public List<Fotograf> PaginatedResult(List<Fotograf> t, int page, int rowsPerPage)
+        {
+            @ViewBag.TotalRecords = t.Count;
+            @ViewBag.CurrentPage = page;
+
+            var skip = (page - 1) * rowsPerPage;
+
+            var paginatedResult = t.Skip(skip).Take(rowsPerPage).ToList();
+            return paginatedResult;
+        }
+
+        public IActionResult PagedFotograflar(string search = null, int page = 1)
+        {
+            var jobs = _context.Fotograflar
+                       .Where(x => x.FotografAciklamasi.Contains(search) || search == null)
+                       .ToList();
+
+            var paginatedResult = PaginatedResult(jobs, page, 10);
+            viewModel.Fotograflar = PaginatedResult(jobs, page, 10);
+            viewModel.Kullanicilar = _context.Kullanicilar.ToList();
+            return View(viewModel);
+        }
+        public IActionResult FotografListele(int page=1,int pageSize=2)
         {
 
-          
-        viewModel.Fotograflar = _context.Fotograflar.ToList();
+
+            viewModel.Fotograflar = _context.Fotograflar.ToList();
             viewModel.Kullanicilar = _context.Kullanicilar.ToList();
+            //IPagedList<Fotograf> ipagedListConversion = viewModel.Fotograflar.ToPagedList(i ?? 1, 3);
+
+
+           // IPagedList<Fotograf> ipagedListConversion = viewModel.Fotograflar.ToPagedList(i ?? 1, 3);
+            //viewModel.FotograflarPaged = ipagedListConversion;
+
+
             return View(viewModel);
         }
 

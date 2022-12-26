@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using WebProgramlama.Data;
@@ -117,6 +118,10 @@ namespace WebProgramlama.Controllers
         }
 
 
+
+
+
+
         public IActionResult Fotograf(int id)
         {
 
@@ -128,11 +133,14 @@ namespace WebProgramlama.Controllers
 
             return View(viewModel);
         }
-        public IActionResult Kullanici(string id)
+
+        public IActionResult Kullanici(string id,int page=1)
         {
 
             viewModel.secilenKullanici = _context.Kullanicilar.ToList().Where(k => k.Id == id).FirstOrDefault();
             viewModel.Fotograflar = _context.Fotograflar.ToList().Where(f=>f.KullaniciID==id).ToList();
+            viewModel.Fotograflar = PaginatedResult(viewModel.Fotograflar, page, 10);
+
             viewModel.Kategoriler = _context.Kategoriler.ToList();
             viewModel.Kullanicilar = _context.Kullanicilar.ToList();
 
@@ -160,49 +168,97 @@ namespace WebProgramlama.Controllers
             return View(viewModel);
         }
 
-        public IActionResult Fotograflar(int id)
+        public List<Fotograf> PaginatedResult(List<Fotograf> t, int page, int rowsPerPage)
+        {
+            @ViewBag.TotalRecords = t.Count;
+            @ViewBag.CurrentPage = page;
+
+            var skip = (page - 1) * rowsPerPage;
+
+            var paginatedResult = t.Skip(skip).Take(rowsPerPage).ToList();
+            return paginatedResult;
+        }
+
+        public IActionResult PagedFotograflar(string search = null, int page = 1)
+        {
+            var jobs = _context.Fotograflar
+                       .Where(x => x.FotografAciklamasi.Contains(search) || search == null)
+                       .ToList();
+
+           
+            viewModel.Fotograflar = PaginatedResult(jobs, page, 10);
+            viewModel.Kullanicilar = _context.Kullanicilar.ToList();
+            return View(viewModel);
+        }
+
+
+        public IActionResult Fotograflar(int id, int page = 1)
         {
             var fotograflar= _context.Fotograflar.ToList(); 
             if (id == 0)
             {
-                 fotograflar = _context.Fotograflar.ToList();
+                var jobs = _context.Fotograflar.ToList();
+
+
+                viewModel.Fotograflar = PaginatedResult(jobs, page, 10);
+                fotograflar = _context.Fotograflar.ToList();
 
             }
             else if (id == 1)
             {
                 //linq
-                fotograflar = _context.Fotograflar.ToList().Where(f=>f.KategoriID==1).ToList();
+                var jobs = _context.Fotograflar.ToList().Where(f => f.KategoriID == 1).ToList();
+
+
+                viewModel.Fotograflar = PaginatedResult(jobs, page,10);
+                //fotograflar = _context.Fotograflar.ToList().Where(f=>f.KategoriID==1).ToList();
 
             }
             else if (id == 2)
             {
                 //linq
-                fotograflar = _context.Fotograflar.ToList().Where(f => f.KategoriID == 2).ToList();
+                //fotograflar = _context.Fotograflar.ToList().Where(f => f.KategoriID == 2).ToList();
+                var jobs = _context.Fotograflar.ToList().Where(f => f.KategoriID == 2).ToList();
+
+
+                viewModel.Fotograflar = PaginatedResult(jobs, page, 10);
 
             }
             else if (id == 3)
             {
                 //linq
-                fotograflar = _context.Fotograflar.ToList().Where(f => f.KategoriID == 3).ToList();
+                //fotograflar = _context.Fotograflar.ToList().Where(f => f.KategoriID == 3).ToList();
+                var jobs = _context.Fotograflar.ToList().Where(f => f.KategoriID == 3).ToList();
 
+
+                viewModel.Fotograflar = PaginatedResult(jobs, page,10);
             }
             else if (id == 4)
             {
                 //linq
-                fotograflar = _context.Fotograflar.ToList().Where(f => f.KategoriID == 4).ToList();
+                //fotograflar = _context.Fotograflar.ToList().Where(f => f.KategoriID == 4).ToList();
+                var jobs = _context.Fotograflar.ToList().Where(f => f.KategoriID == 4).ToList();
 
+
+                viewModel.Fotograflar = PaginatedResult(jobs, page, 10);
             }
             else if (id == 5)
             {
                 //linq
-                fotograflar = _context.Fotograflar.ToList().Where(f => f.KategoriID ==5).ToList();
+                //fotograflar = _context.Fotograflar.ToList().Where(f => f.KategoriID ==5).ToList();
+                var jobs = _context.Fotograflar.ToList().Where(f => f.KategoriID == 5).ToList();
 
+
+                viewModel.Fotograflar = PaginatedResult(jobs, page,10);
             }
             else if (id == 7)
             {
                 //linq
-                fotograflar = _context.Fotograflar.ToList().Where(f => f.KategoriID == 4).ToList();
+                //fotograflar = _context.Fotograflar.ToList().Where(f => f.KategoriID == 4).ToList();
+                var jobs = _context.Fotograflar.ToList().Where(f => f.KategoriID == 7).ToList();
 
+
+                viewModel.Fotograflar = PaginatedResult(jobs, page,10);
             }
             viewModel.Fotograflar = _context.Fotograflar.ToList();
             viewModel.Kategoriler = _context.Kategoriler.ToList();
