@@ -11,7 +11,7 @@
 
     <div class="row">
 
-       <div class="col-md">
+       <div class="col-md-4">
             @{
                 var base641 = Convert.ToBase64String(Model.secilenFotograf.yuklenenFotograf);
                 var imgsrc1 = string.Format("data:image/gif;base64,{0}", base641);
@@ -20,12 +20,12 @@
             <img src="@imgsrc1"  class="img-thumbnail">
 
        </div>
-        <div class="col-md">
-            <div class="row">
-                <h5 class="card-title">@Model.secilenFotograf.FotografAciklamasi</h5>
+        <div class="col-md-8" style="background-color:#e3e3e3;text-align: center;height: fit-content;">
+            <div class="row" style="margin:10px">
+                <h5 class="card-title lead">@Model.secilenFotograf.FotografAciklamasi</h5>
 
             </div>
-            <div class="row">
+            <div class="row" style="margin:10px">
                 @{
                     var kategori = Model.Kategoriler.ToList().Where(k => k.KategoriId == Model.secilenFotograf.KategoriID).FirstOrDefault();
                 }
@@ -33,7 +33,7 @@
                               @*  <h5 class="card-title">@kategori.KategoriIsmi</h5>*@
 
             </div>
-            <div class="row">
+            <div class="row" style="margin:10px">
                 @{
                     var kullanici = Model.Kullanicilar.ToList().Where(k => k.Id == Model.secilenFotograf.KullaniciID).FirstOrDefault();
                 }

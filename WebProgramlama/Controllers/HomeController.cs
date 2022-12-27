@@ -72,7 +72,7 @@ namespace WebProgramlama.Controllers
 
         
         [HttpPost]
-        public async Task<IActionResult> FotografEkle(Fotograf entity, IFormFile file)
+        public async Task<IActionResult> FotografEkle(Fotograf entity, IFormFile file,int page=1)
         {
             var user = User.Identity.Name;
             userId = _context.Kullanicilar.Where(x => x.Email == user).Select(y => y.Id).FirstOrDefault();
@@ -101,11 +101,14 @@ namespace WebProgramlama.Controllers
                 }
                 entity.KullaniciID = userId;
                 // fotograf.Kullanici = (Kullanici)(from k in _context.Kullanicilar where k.KullaniciID == 1 select k);
-                
-                //entity.DateAdded = DateTime.Now;
+                viewModel.secilenKullanici = _context.Kullanicilar.ToList().Where(k => k.Id == userId).FirstOrDefault();
+                viewModel.Fotograflar = _context.Fotograflar.ToList().Where(f => f.KullaniciID == userId).ToList();
+                viewModel.Fotograflar = PaginatedResult(viewModel.Fotograflar, page, 10);
+                viewModel.Kategoriler = _context.Kategoriler.ToList();
+                viewModel.Kullanicilar = _context.Kullanicilar.ToList();
                 _context.Fotograflar.Add(entity);
                 _context.SaveChanges();
-                return RedirectToAction("Kategori",entity.KategoriID);
+                return RedirectToAction("Fotograflar", "Home");
             }
 
             return View();
@@ -134,6 +137,7 @@ namespace WebProgramlama.Controllers
             return View(viewModel);
         }
 
+        [Authorize]
         public IActionResult Kullanici(string id,int page=1)
         {
 
@@ -159,7 +163,6 @@ namespace WebProgramlama.Controllers
         public IActionResult Kategori(int id)
         {
 
-            //viewModel.secilenKullanici = _context.Kullanicilar.ToList().Where(k => k.Id == id).FirstOrDefault();
             viewModel.Fotograflar = _context.Fotograflar.ToList().Where(f => f.KategoriID == id).ToList();
             viewModel.Kategoriler = _context.Kategoriler.ToList().Where(f => f.KategoriId == id).ToList();
             viewModel.Kullanicilar = _context.Kullanicilar.ToList();
