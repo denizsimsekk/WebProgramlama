@@ -34,12 +34,10 @@
             </td>
             <td>
                 @Html.ActionLink("Düzenle", "KullaniciDuzenle","Admin",new {kullaniciID=item.Id},null) |
-                @* @Html.ActionLink("Detaylar", "Details") |*@
                 @Html.ActionLink("Sil", "KullaniciSil","Admin",new {kullaniciID=item.Id},null)
             </td>
     </tr>
    }
 </table>
-@*<a class="btn btn-dark" asp-controller="Admin" asp-action="KullaniciEkleSayfasi">Kullanıcı Ekle</a>*@
 
 @await Html.PartialAsync("_Pagination",10)

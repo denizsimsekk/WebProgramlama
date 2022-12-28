@@ -129,6 +129,9 @@
   <data name="categories" xml:space="preserve">
     <value>Kategoriler</value>
   </data>
+  <data name="categoryName" xml:space="preserve">
+    <value>Kategori İsmi</value>
+  </data>
   <data name="city" xml:space="preserve">
     <value>Şehir</value>
   </data>
@@ -152,6 +155,9 @@
   </data>
   <data name="movieShow" xml:space="preserve">
     <value>Filmler - Diziler</value>
+  </data>
+  <data name="numberOfPhotos" xml:space="preserve">
+    <value>Fotoğraf Sayısı</value>
   </data>
   <data name="open" xml:space="preserve">
     <value>Aç</value>

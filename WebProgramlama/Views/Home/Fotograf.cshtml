@@ -1,4 +1,6 @@
-﻿@*
+﻿@using System.Drawing
+@using System.Drawing.Drawing2D
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -30,7 +32,6 @@
                     var kategori = Model.Kategoriler.ToList().Where(k => k.KategoriId == Model.secilenFotograf.KategoriID).FirstOrDefault();
                 }
                 <a asp-controller="Home" asp-action="Kategori" asp-route-id="@kategori.KategoriId" id="goSwhButton" bc-button="true">@kategori.KategoriIsmi</a>
-                              @*  <h5 class="card-title">@kategori.KategoriIsmi</h5>*@
 
             </div>
             <div class="row" style="margin:10px">
@@ -53,36 +54,109 @@
 
 
 
-    @*<div class="row card-layout">
+    
+    <p style="margin:10px;font-family: 'Orienta',sans-serif;text-align:center;">Diğer Kullanıcıların Fotoğrafları</p>
+    @{
+        string ResizeImage(byte[] data)
+        {
+            using (var ms = new MemoryStream(data))
+            {
+                var image = Image.FromStream(ms);
 
-        <br />
+                var ratioX = (double)100 / image.Width;
+                var ratioY = (double)50 / image.Height;
 
+                var ratio = Math.Min(ratioX, ratioY);
 
+                //var width = (int)(image.Width * ratio);
+                //var height = (int)(image.Height * ratio);
 
+                var width = 250;
+                var height = 400;
 
-        
-            <div class="col-sm control-section card-control-section">
-                <div class="card">
-                    @{
-                        var base64 = Convert.ToBase64String(Model.yuklenenFotograf);
-                        var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
-                    }
+                var newImage = new Bitmap(width, height);
 
-                    <img class="card-img-top" src="@imgsrc" width="350px" height="300px" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">@Model.FotografAciklamasi</h5>
-                        @*//<a asp-controller="Home" asp-action="Fotograf" asp-route-id="@Model.FotografId" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>*@
+                Graphics.FromImage(newImage).DrawImage(image, 0, 0, width, height);
 
-                        @* <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                Bitmap bmp = new Bitmap(newImage);
+
+                ImageConverter converter = new ImageConverter();
+
+                data = (byte[])converter.ConvertTo(bmp, typeof(byte[]));
+
+                return "data:image/gif;base64," + Convert.ToBase64String(data);
+            }
+        }
+    }
+    <div class="row" style="margin:10px">
+        @{
+            Random r = new Random();
+            int count = Model.TumFotograflar.Count();
+            int random1 = r.Next(count);
+            int random2 = r.Next(count);
+            int random3 = r.Next(count);
+        }
+        <center>
+            <div class="slider">
+
+                <div class="imgs_slides">
+                    <input type="radio" name="radio-btn" id="radio1" />
+
+                    <input type="radio" name="radio-btn" id="radio2" />
+
+                    <input type="radio" name="radio-btn" id="radio3" />
+                    <div class="first slide" id="slaytYazilari">
+                        @{
+
+                            var base64 = Convert.ToBase64String(Model.TumFotograflar[random1].yuklenenFotograf);
+                            var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+                            var src = ResizeImage(Model.TumFotograflar[random1].yuklenenFotograf);
+                        }
+
+                        <a asp-controller="Home" asp-action="Fotograf" asp-route-id="@Model.TumFotograflar[random1].FotografId" id="goSwhButton" bc-button="true">
+                            <img src="@src" class="hover img-fluid" title="@Model.TumFotograflar[random1].FotografAciklamasi">
+
+                        </a>
+
+                    </div>
+
+                    <div class="slide" id="slaytYazilari">
+                        <a asp-controller="Home" asp-action="Fotograf" asp-route-id="@Model.TumFotograflar[random2].FotografId" id="goSwhButton" bc-button="true">
+                            @{
+
+                                var base640 = Convert.ToBase64String(Model.TumFotograflar[random2].yuklenenFotograf);
+                                var imgsrc0 = string.Format("data:image/gif;base64,{0}", base640);
+                                var src1 = ResizeImage(Model.TumFotograflar[random2].yuklenenFotograf);
+                            }
+                            <img src="@src1" class="hover img-fluid" title="@Model.TumFotograflar[random1].FotografAciklamasi">
+                        </a>
+
+                    </div>
+                    <div class="slide " id="slaytYazilari">
+                        <a asp-controller="Home" asp-action="Fotograf" asp-route-id="@Model.TumFotograflar[random3].FotografId" id="goSwhButton" bc-button="true">
+                            @{
+
+                                var base642 = Convert.ToBase64String(Model.TumFotograflar[random3].yuklenenFotograf);
+                                var imgsrc2 = string.Format("data:image/gif;base64,{0}", base642);
+                                var src2 = ResizeImage(Model.TumFotograflar[random3].yuklenenFotograf);
+                            }
+                            <img src="@src2" class="hover img-fluid" title="@Model.TumFotograflar[random1].FotografAciklamasi">
+                        </a>
                     </div>
                 </div>
+                <div class="navigation">
+                    <label for="radio1" class="navigation-btn">
+                    </label>
+                    <label for="radio2" class="navigation-btn">
+                    </label>
+                    <label for="radio3" class="navigation-btn">
+                    </label>
+
+                </div>
             </div>
-        
-        <br />
+        </center>
 
-    </div>*@
-
+    </div>
 
 
 

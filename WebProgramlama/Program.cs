@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Build.Framework;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using System.Configuration;
 using System.Globalization;
 using System.Reflection;
 using WebProgramlama.Data;
@@ -17,7 +19,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddIdentity<Kullanici,IdentityRole>().AddDefaultTokenProviders().AddDefaultUI()
+builder.Services.AddIdentity<Kullanici,IdentityRole>(x =>
+{
+    x.Password.RequiredLength = 3;
+    x.Password.RequireUppercase = false;
+    x.Password.RequireLowercase = false;
+    x.Password.RequireNonAlphanumeric = false;
+    x.Password.RequireDigit = false;
+}).AddDefaultTokenProviders().AddDefaultUI()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
@@ -60,10 +69,12 @@ builder.Services.Configure<RequestLocalizationOptions>(
         options.SupportedCultures = supportedCultures;
         options.SupportedUICultures = supportedCultures;
         options.RequestCultureProviders.Insert(0, new QueryStringRequestCultureProvider());
+        
 
     });
 
-
+//builder.Services.AddIdentity<Kullanici, IdentityRole>(
+//}).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 //builder.Services.AddMvc().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
 
 var app = builder.Build();

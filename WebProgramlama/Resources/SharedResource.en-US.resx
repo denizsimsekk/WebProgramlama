@@ -129,14 +129,29 @@
   <data name="categories" xml:space="preserve">
     <value>Categories</value>
   </data>
+  <data name="categoryName" xml:space="preserve">
+    <value>Category Name</value>
+  </data>
   <data name="city" xml:space="preserve">
     <value>City</value>
+  </data>
+  <data name="Diğer" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="Film-Dizi" xml:space="preserve">
+    <value>Movies - TV Shows</value>
   </data>
   <data name="hello" xml:space="preserve">
     <value>Hello</value>
   </data>
   <data name="home" xml:space="preserve">
     <value>Home</value>
+  </data>
+  <data name="Kanvas" xml:space="preserve">
+    <value>Canvas</value>
+  </data>
+  <data name="Kitap" xml:space="preserve">
+    <value>Books</value>
   </data>
   <data name="language" xml:space="preserve">
     <value>Language</value>
@@ -147,11 +162,17 @@
   <data name="logout" xml:space="preserve">
     <value>Log Out</value>
   </data>
+  <data name="Manzara" xml:space="preserve">
+    <value>Scenery</value>
+  </data>
   <data name="more" xml:space="preserve">
     <value>More...</value>
   </data>
   <data name="movieShow" xml:space="preserve">
     <value>Movies - TV Shows</value>
+  </data>
+  <data name="numberOfPhotos" xml:space="preserve">
+    <value>Number Of Photos</value>
   </data>
   <data name="open" xml:space="preserve">
     <value>Open</value>
@@ -171,10 +192,16 @@
   <data name="scenery" xml:space="preserve">
     <value>Scenery</value>
   </data>
+  <data name="Sonbahar" xml:space="preserve">
+    <value>Autmn</value>
+  </data>
   <data name="uploadPhoto" xml:space="preserve">
     <value>Upload Photo</value>
   </data>
   <data name="welcome" xml:space="preserve">
     <value>Welcome</value>
+  </data>
+  <data name="Şehir" xml:space="preserve">
+    <value>City</value>
   </data>
 </root>

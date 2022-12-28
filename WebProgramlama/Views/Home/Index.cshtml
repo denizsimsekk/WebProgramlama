@@ -9,11 +9,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
 @inject LanguageService language
 
-@*<div class="text-center">
-
-    <h1 class="display-4">@language.Getkey("welcome")</h1>
-
-</div>*@
 
 <div class="container-fluid">
     <div class="row">
@@ -27,32 +22,25 @@
                     <input type="radio" name="radio-btn" id="radio2" />
 
                     <input type="radio" name="radio-btn" id="radio3" />
-                    <div class="first slide" id="slaytYazilari" name="dalaman">
+                    <div class="first slide" id="slaytYazilari">
 
-                        <a href="#nufus">
-                            <img src="images/6.jpg" class="hover img-fluid" id="dalaman" title="Nüfus">
+                            <img src="images/6.jpg" class="hover img-fluid" id="dalaman" >
 
-                        </a>
 
                     </div>
 
-                    <div class="slide" id="slaytYazilari" name="datca">
-                        <a href="#antikKent">
+                    <div class="slide" id="slaytYazilari" >
+                        
 
-                            <img src="images/7.jpg" class="hover img-fluid" title="Hippokome Antik Kenti">
-                        </a>
+                            <img src="images/7.jpg" class="hover img-fluid" >
+                       
 
                     </div>
-                    <div class="slide " id="slaytYazilari" name="kanyon">
-                        <a href="#kanyon">
-                            <img src="images/8.jpg" class="hover img-fluid" title="Saklıkent Kanyonu">
-                        </a>
+                    <div class="slide " id="slaytYazilari" >
+                       
+                            <img src="images/8.jpg" class="hover img-fluid" >
+                       
                     </div>
-                    <!--<div class="slide " id="slaytYazilari" name="marmaris">
-                        <a href="#marmaris">
-                            <img src="images/3.jpg" class="hover img-fluid" title="Marmaris Müzesi" onclick="marmarisMuzesi()">
-                        </a>
-                    </div>-->
                 </div>
                 <div class="navigation">
                     <label for="radio1" class="navigation-btn">
@@ -61,8 +49,6 @@
                     </label>
                     <label for="radio3" class="navigation-btn">
                     </label>
-                    <!-- <label for="radio4" class="navigation-btn">
-                    </label>-->
 
                 </div>
             </div>
@@ -77,9 +63,7 @@
             <img class="card-img-top" src="~/images/22.jpg" width="350px" height="300px" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">@language.Getkey("scenery")</h5>
-                @*<p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>*@
-                <a asp-controller="Home" asp-action="Fotograflar" asp-route-id="3" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>
+                <a asp-controller="Home" asp-action="Kategori" asp-route-id="3" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>
 
             </div>
         </div>
@@ -87,9 +71,7 @@
             <img class="card-img-top" src="~/images/11.jpg" width="350px" height="300px" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">@language.Getkey("autmn")</h5>
-               @* <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>*@
-                <a asp-controller="Home" asp-action="Fotograflar" asp-route-id="1" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>
+                <a asp-controller="Home" asp-action="Kategori" asp-route-id="1" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>
 
             </div>
         </div>
@@ -97,9 +79,7 @@
             <img class="card-img-top" src="~/images/12.jpg" width="350px" height="300px"  alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">@language.Getkey("books")</h5>
-               @* <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>*@
-                <a asp-controller="Home" asp-action="Fotograflar" asp-route-id="2" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>
+                <a asp-controller="Home" asp-action="Kategori" asp-route-id="2" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>
 
             </div>
         </div>
@@ -107,9 +87,7 @@
             <img class="card-img-top" src="~/images/23.jpg" width="350px" height="300px" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">@language.Getkey("movieShow")</h5>
-                @* <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>*@
-                <a asp-controller="Home" asp-action="Fotograflar" asp-route-id="6" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>
+                <a asp-controller="Home" asp-action="Kategori" asp-route-id="6" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>
 
             </div>
         </div>
@@ -120,9 +98,7 @@
             <img class="card-img-top" src="~/images/15.jpg" width="350px" height="300px" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">@language.Getkey("city")</h5>
-                @* <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>*@
-                <a asp-controller="Home" asp-action="Fotograflar" asp-route-id="4" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>
+                <a asp-controller="Home" asp-action="Kategori" asp-route-id="4" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>
 
             </div>
         </div>
@@ -130,9 +106,7 @@
             <img class="card-img-top" src="~/images/17.jpg" width="350px" height="300px" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">@language.Getkey("canvas")</h5>
-                @* <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>*@
-                <a asp-controller="Home" asp-action="Fotograflar" asp-route-id="5" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>
+                <a asp-controller="Home" asp-action="Kategori" asp-route-id="5" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>
 
             </div>
         </div>
@@ -140,10 +114,8 @@
             <img class="card-img-top" src="~/images/21.jpg" width="350px" height="300px" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">@language.Getkey("other")</h5>
-                <a asp-controller="Home" asp-action="Fotograflar" asp-route-id="7" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>
+                <a asp-controller="Home" asp-action="Kategori" asp-route-id="7" id="goSwhButton" bc-button="true">@language.Getkey("more")</a>
 
-                @* <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>*@
             </div>
         </div>
     </div>

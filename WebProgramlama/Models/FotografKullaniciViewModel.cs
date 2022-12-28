@@ -9,7 +9,7 @@ namespace WebProgramlama.Models
         public Fotograf secilenFotograf { get; set; }
         public Kullanici secilenKullanici { get; set; }
         public List<Fotograf> Fotograflar { get; set; }
-        public IPagedList<Fotograf> FotograflarPaged { get; set; }
+        public List<Fotograf> TumFotograflar { get; set; }
         public List<Kullanici> Kullanicilar { get; set; }
         public List<Kategori> Kategoriler { get; set; }
     }

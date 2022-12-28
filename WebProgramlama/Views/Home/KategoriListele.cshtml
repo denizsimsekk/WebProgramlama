@@ -11,18 +11,21 @@
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Kategori İsmi</th>
-            <th scope="col">Fotoğraf Sayısı</th>
+            <th scope="col">@language.Getkey("categoryName")</th>
+            <th scope="col">@language.Getkey("numberOfPhotos")</th>
             
         </tr>
     </thead>
     <tbody>
+        @{
+            int r=1;
+        }
         @foreach(var item in Model.Kategoriler)
         {
             <tr>
-                <th scope="row">1</th>
+                <th scope="row">@r</th>
                 <td>
-                    <a asp-controller="Home" asp-action="Kategori" asp-route-id="@item.KategoriId" id="goSwhButton" bc-button="true">@item.KategoriIsmi</a>
+                    <a asp-controller="Home" asp-action="Kategori" asp-route-id="@item.KategoriId" id="goSwhButton" bc-button="true">@language.Getkey(@item.KategoriIsmi)</a>
                 </td>
                 @{
                     var fotograflar = Model.Fotograflar.ToList().Where(f => f.KategoriID == item.KategoriId).ToList();
@@ -30,25 +33,9 @@
                 
                 <td>@fotograflar.Count()</td>
             </tr>
+            r++;
         }
-        @*<tr>
-            <th scope="row">1</th>
-            <td>@</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-        </tr>*@
+       
     </tbody>
 </table>
 

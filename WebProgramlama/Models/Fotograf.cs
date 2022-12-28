@@ -7,7 +7,9 @@ namespace WebProgramlama.Models
     {
         [Key]
         public int FotografId { get; set; }
+        
         [MaxLength(200)]
+
         public string FotografAciklamasi { get; set; }
 
         [ForeignKey("Kullanici")]

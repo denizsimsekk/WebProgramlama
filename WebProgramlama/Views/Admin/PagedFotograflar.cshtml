@@ -43,8 +43,6 @@
                 @item.FotografAciklamasi
             </td>
 
-            @*</tr>
-        <tr>*@
             @{
                 var base64 = Convert.ToBase64String(item.yuklenenFotograf);
                 var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
@@ -53,8 +51,6 @@
                 <img src="@imgsrc" width="60" />
             </td>
             <td>
-                @*  @Html.ActionLink("Düzenle", "Edit") |*@
-                @* @Html.ActionLink("Detaylar", "Details") |*@
                 @Html.ActionLink("Sil", "FotografSil","Admin",new {fotogradId=item.FotografId},null)
 
             </td>

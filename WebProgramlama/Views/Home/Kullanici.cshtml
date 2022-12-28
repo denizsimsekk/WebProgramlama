@@ -1,28 +1,25 @@
-﻿@*
+﻿@using System.Drawing
+@using System.Drawing.Drawing2D
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
 @model FotografKullaniciViewModel
 @inject LanguageService language
-@*@{
 
-    var email = @Model.secilenKullanici.Email;
-    var kullaniciAdi = @Model.secilenKullanici.KullaniciAd;
-    var kullaniciSoyadi = @Model.secilenKullanici.KullaniciSoyadi;
-}*@
 <div class="container-fluid">
 
 
 
 
     <div class="row">
-        <h1>@Model.secilenKullanici.Email;</h1>
+        <h1 style="margin:10px;font-family:'Lucida Handwriting','Courier New',monospace;">@Model.secilenKullanici.Email</h1>
     </div>
 
     <div class="row">
         <div class="col-md">
-            <h3>@Model.secilenKullanici.KullaniciAd @Model.secilenKullanici.KullaniciSoyadi</h3>
+            <h3 style="margin:10px;font-family: 'Times New Roman',Times,serif;">@Model.secilenKullanici.KullaniciAd @Model.secilenKullanici.KullaniciSoyadi</h3>
       
         </div>
        
@@ -30,7 +27,7 @@
     
   
 
-    <div style="display: inline-block">
+    <div style="display: inline-block;width:100%">
         @for (int i = 0; i < Model.Fotograflar.Count(); i += 3)
         {
             <div class="row">
@@ -38,32 +35,37 @@
                     int j = 0;
                     for (; j <= 2 && i + j < Model.Fotograflar.Count(); j++)
                     {
-                        <div class="col-md-4">
-                            <div class="card">
-                                @{
+                                        <div class="col-md-4">
+                                            <div class="card">
+                                                @{
 
-                                    var base64 = Convert.ToBase64String(Model.Fotograflar[i + j].yuklenenFotograf);
-                                    var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
-                                }
+                                                var base640 = Convert.ToBase64String(Model.Fotograflar[i + j].yuklenenFotograf);
+                                                var imgsrc0 = string.Format("data:image/gif;base64,{0}", base640);
+                                                }
 
-                                <img class="card-img-top" src="@imgsrc" width="350px" height="300px" alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title">@Model.Fotograflar[i+j].FotografAciklamasi</h5>
-                                    <a asp-controller="Home" asp-action="Fotograf" asp-route-id="@Model.Fotograflar[i+j].FotografId" id="goSwhButton" bc-button="true">@language.Getkey("open")</a>
+                                                <img class="card-img-top" src="@imgsrc0" width="350px" height="300px" alt="Card image cap">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">@Model.Fotograflar[i+j].FotografAciklamasi</h5>
+                                                    <a asp-controller="Home" asp-action="Fotograf" asp-route-id="@Model.Fotograflar[i+j].FotografId" id="goSwhButton" bc-button="true">@language.Getkey("open")</a>
 
-                                    @* <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>*@
-                                </div>
-                            </div>
-                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
                     }
                 }
             </div>
         }
     </div>
+    
 
 
 </div>
+
+
+
+
+
+
 @await Html.PartialAsync("_Pagination",10)
 
 

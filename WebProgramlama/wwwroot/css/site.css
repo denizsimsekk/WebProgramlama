@@ -94,11 +94,7 @@ body {
 }
 
 @media screen and (max-width: 800px) {
-    #sehir {
-        margin: auto;
-        margin-top: 10px;
-        width: 90%;
-    }
+   
 
     .slider {
         width: 100%;
