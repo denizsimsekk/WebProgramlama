@@ -8,13 +8,17 @@
 @model FotografKullaniciViewModel
 @inject LanguageService language
 
-<div class="container-fluid">
+<body onload="renkDegistir()">
+
+
+
+<div class="container-fluid" >
 
 
 
 
-    <div class="row">
-        <h1 style="margin:10px;font-family:'Lucida Handwriting','Courier New',monospace;">@Model.secilenKullanici.Email</h1>
+    <div class="row" id="kullaniciEmail">
+        <h1 style="margin:10px;font-family:'Lucida Handwriting','Courier New',monospace;" >@Model.secilenKullanici.Email</h1>
     </div>
 
     <div class="row">
@@ -35,22 +39,22 @@
                     int j = 0;
                     for (; j <= 2 && i + j < Model.Fotograflar.Count(); j++)
                     {
-                                        <div class="col-md-4">
-                                            <div class="card">
-                                                @{
+                                            <div class="col-md-4">
+                                                <div class="card">
+                                                    @{
 
                                                 var base640 = Convert.ToBase64String(Model.Fotograflar[i + j].yuklenenFotograf);
                                                 var imgsrc0 = string.Format("data:image/gif;base64,{0}", base640);
-                                                }
+                                                    }
 
-                                                <img class="card-img-top" src="@imgsrc0" width="350px" height="300px" alt="Card image cap">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">@Model.Fotograflar[i+j].FotografAciklamasi</h5>
-                                                    <a asp-controller="Home" asp-action="Fotograf" asp-route-id="@Model.Fotograflar[i+j].FotografId" id="goSwhButton" bc-button="true">@language.Getkey("open")</a>
+                                                    <img class="card-img-top" src="@imgsrc0" width="350px" height="300px" alt="Card image cap">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">@Model.Fotograflar[i+j].FotografAciklamasi</h5>
+                                                        <a asp-controller="Home" asp-action="Fotograf" asp-route-id="@Model.Fotograflar[i+j].FotografId" id="goSwhButton" bc-button="true">@language.Getkey("open")</a>
 
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                     }
                 }
             </div>
@@ -61,8 +65,17 @@
 
 </div>
 
+</body>
+@*js*@
+<script>
+   
+    function renkDegistir()
+    {
+        document.getElementById("kullaniciEmail").style.background = "#d4d4d4";
+        setTimeout(function () { document.getElementById("kullaniciEmail").style.background = "#ffffff"; }, 2000);
+    }
 
-
+</script>
 
 
 
