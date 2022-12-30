@@ -23,6 +23,15 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@language.Getkey("home")</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Sayfam">@language.Getkey("myPage")</a>
+                            </li>
+
+
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Fotograflar">@language.Getkey("photos")</a>
                         </li>
@@ -42,6 +51,7 @@
                             }
                            
                         }
+                       
                         
                        
                       

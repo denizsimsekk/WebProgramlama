@@ -17,7 +17,6 @@ namespace WebProgramlama.Controllers
     public class AdminController : Controller
     {
         private readonly ILogger<AdminController> _logger;
-        //private readonly DbContext _context;
         private readonly ApplicationDbContext _context;
         private readonly UserManager<Kullanici> _userManager;
         private FotografKullaniciViewModel viewModel = new FotografKullaniciViewModel();
@@ -55,17 +54,9 @@ namespace WebProgramlama.Controllers
             .ToList();
 
             viewModel.Kullanicilar = PaginatedResult(jobs, page, 10);
-            //var kullanicilar = _context.Kullanicilar.ToList();
-            // = _context.Kullanicilar.ToList();
+        
             viewModel.Fotograflar = _context.Fotograflar.ToList();
-           // const int pageSize = 10;
-           // if (pg < 1)
-           //     pg = 1;
-           // int recsCount = viewModel.Kullanicilar.Count();
-           // var pager = new Pager(recsCount, pg, pageSize);
-           // int recSkip = (pg - 1) * pageSize;
-           //viewModel.Kullanicilar = viewModel.Kullanicilar.Skip(recSkip).Take(pager.PageSize).ToList();
-           // this.ViewBag.Pager = pager;
+     
             
             return View(viewModel);
         }
@@ -79,27 +70,6 @@ namespace WebProgramlama.Controllers
         }
 
         
-        //[HttpPost]
-        //public IActionResult KullaniciEkle(Kullanici kullanici)
-        //{
-        //    string p = kullanici.PasswordHash;
-        //    byte[] salt = RandomNumberGenerator.GetBytes(128 / 8); // divide by 8 to convert bits to bytes
-        //    Console.WriteLine($"Salt: {Convert.ToBase64String(salt)}");
-
-        //    // derive a 256-bit subkey (use HMACSHA256 with 100,000 iterations)
-        //    string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-        //        password: p!,
-        //        salt: salt,
-        //        prf: KeyDerivationPrf.HMACSHA256,
-        //        iterationCount: 100000,
-        //        numBytesRequested: 256 / 8));
-        //    kullanici.PasswordHash = hashed;
-
-        //    _context.Kullanicilar.Add(kullanici);
-        //    _context.SaveChanges();
-
-        //    return RedirectToAction("KullaniciListele", "Admin");
-        //}
 
         public IActionResult KategoriEkleSayfasi()
         {
@@ -127,7 +97,6 @@ namespace WebProgramlama.Controllers
         public IActionResult KullaniciDuzenle(string kullaniciID)
         {
             var kullanici = _context.Kullanicilar.Find(kullaniciID);
-            // _context.Kullanicilar.Remove(kullanici);
 
             return View(kullanici);
         }

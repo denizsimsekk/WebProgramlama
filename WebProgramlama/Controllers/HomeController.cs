@@ -58,7 +58,15 @@ namespace WebProgramlama.Controllers
             return View();
         }
 
+        [Authorize]
+        public IActionResult Sayfam()
+        {
+            var user = User.Identity.Name;
+            userId = _context.Kullanicilar.Where(x => x.Email == user).Select(y => y.Id).FirstOrDefault();
+            return RedirectToAction("Kullanici", "Home", new { id = userId });
+        }
 
+       
         [Authorize]
         public IActionResult FotografEkleSayfasi()
         {
@@ -130,7 +138,6 @@ namespace WebProgramlama.Controllers
             viewModel.Fotograflar = PaginatedResult(viewModel.Fotograflar, page, 10);
             viewModel.Kategoriler = _context.Kategoriler.ToList();
             viewModel.Kullanicilar = _context.Kullanicilar.ToList();
-
             return View(viewModel);
         }
         public IActionResult KategoriListele()

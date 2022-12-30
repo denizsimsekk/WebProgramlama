@@ -156,6 +156,9 @@
   <data name="movieShow" xml:space="preserve">
     <value>Filmler - Diziler</value>
   </data>
+  <data name="myPage" xml:space="preserve">
+    <value>Sayfam</value>
+  </data>
   <data name="numberOfPhotos" xml:space="preserve">
     <value>Fotoğraf Sayısı</value>
   </data>

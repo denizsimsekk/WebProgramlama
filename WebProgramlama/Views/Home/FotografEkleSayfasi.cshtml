@@ -4,6 +4,7 @@
 @{
 }
 @model FotografKullaniciViewModel
+@inject LanguageService language
 <div class="container mt-5">
     <form method="post" asp-action="FotografEkle" enctype="multipart/form-data">
 
@@ -18,7 +19,7 @@
                 @foreach (var item in Model.Kategoriler)
                 {
 
-                    <option value="@item.KategoriId">@item.KategoriIsmi</option>
+                    <option value="@item.KategoriId">@language.Getkey(@item.KategoriIsmi)</option>
 
                 }
 

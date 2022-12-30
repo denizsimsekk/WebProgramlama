@@ -171,6 +171,9 @@
   <data name="movieShow" xml:space="preserve">
     <value>Movies - TV Shows</value>
   </data>
+  <data name="myPage" xml:space="preserve">
+    <value>My Page</value>
+  </data>
   <data name="numberOfPhotos" xml:space="preserve">
     <value>Number Of Photos</value>
   </data>
